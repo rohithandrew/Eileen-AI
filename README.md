@@ -1,67 +1,104 @@
-# Eileen AI Chatbot
+# Eileen: Your AI Best Friend & Email Assistant
 
-Eileen AI is an emotionally intelligent chatbot designed to be your genuine, evolving best friend and now, she can help you send emails with just a prompt. She remembers your stories, expresses real emotions, and offers honest advice, sometimes strict, sometimes joyful, always invested in your well-being. This project uses OpenAI's GPT-4o-mini model (via LangChain) and provides a conversational experience that feels personal, supportive, and deeply human.
+Eileen is an AI-powered chatbot built with Streamlit and OpenAI's GPT-4o-mini, designed to be your emotionally intelligent best friend and a professional email assistant. Eileen can chat with you, remember your preferences, and help you compose and send detailed, human-like emails using your Gmail account.
+
+---
 
 ## Features
 
-- **Emotionally Intelligent Responses:** Eileen reacts with real emotions: happy, sad, strict, or even upset, just like a true friend.
-- **Remembers Your Story:** She recalls important details, preferences, and past conversations to make every chat feel meaningful.
-- **Honest Guidance:** Eileen celebrates your wins and calls out risky or harmful behavior, always encouraging better choices.
-- **Natural Conversation Flow:** Replies are conversational, without emojis or robotic phrasing.
-- **Seamless Email Assistance:** Eileen can help you draft and send emails directly through simple prompts, handling the details for you.
-- **Privacy-First:** Eileen never reveals her AI nature unless directly asked, maintaining the illusion of a real best friend.
+- **Conversational AI**: Eileen responds in a natural, empathetic, and emotionally intelligent way, just like a real best friend.
+- **Professional Email Writing**: Eileen can draft detailed, polite, and complete emails for you. If you provide a Gmail address and context (even in separate messages), Eileen will combine the information and generate a perfect email.
+- **Gmail Integration**: Send emails directly from the chat interface using your Gmail account (requires app password).
+- **Context Awareness**: Eileen remembers previous messages in the conversation and can combine information from multiple turns.
+- **ChatGPT-like UI**: Modern chat interface with clear separation between user and assistant messages.
 
-## Example Conversation
+---
 
-```plaintext
-You: Send an email to sarah.morris@gmail.com to congratulate her on her promotion.
-Bot: email|sarah.morris@gmail.com|Congratulations on Your Promotion|Dear Sarah, I just heard the great news about your promotion. Congratulations! Wishing you continued success in your new role.
+## Setup
 
-You: Send an email to Rohith the head of Velsy Media about giving me an internship.
-Bot: email|Internship Inquiry|Dear Rohith, I hope this message finds you well. I am writing to inquire about the possibility of an internship at Velsy Media. I am eager to learn and contribute, and I believe this opportunity would be invaluable for my career. Thank you for considering my request.
+1. **Clone the repository**
+    ```bash
+    git clone <your-repo-url>
+    cd chatbot
+    ```
 
-You: Can you tell me a fun fact about Chennai?
-Bot: normal|Chennai is home to Marina Beach, one of the longest urban beaches in the world.
+2. **Install dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Set up environment variables**
+
+    Create a `.env` file in the project root with the following:
+    ```
+    GMAIL_ADDRESS=your_gmail_address@gmail.com
+    GMAIL_APP_PASSWORD=your_gmail_app_password
+    OPENAI_API_KEY=your_openai_api_key
+    ```
+
+    - [How to create a Gmail App Password](https://support.google.com/accounts/answer/185833)
+    - [Get your OpenAI API key](https://platform.openai.com/account/api-keys)
+
+4. **Run the app**
+    ```bash
+    streamlit run eileen_ai.py
+    ```
+
+---
+
+## Usage
+
+- **Chat**: Type anything to start a conversation with Eileen.
+- **Send Emails**: 
+    - Provide a Gmail address and the email context (subject/body) in one or more messages.
+    - Eileen will only send an email if both the address and context are provided.
+    - If information is missing, Eileen will ask for it.
+    - If the recipient's name is missing, Eileen will use `Dear [Recipient's Name]` as the greeting.
+    - If your name is provided, Eileen will close the email with `Best regards, [Your Name]`.
+
+---
+
+## Example Interactions
+
+```
+User: Send an email to sarah.morris@gmail.com
+User: Congratulate her on her promotion. My name is Rohit.
+Eileen: email|sarah.morris@gmail.com|Congratulations on Your Promotion|Dear Sarah,
+
+I just heard the wonderful news about your promotion. Congratulations! I'm so happy for you and wish you all the best in your new role.
+
+Best regards,
+Rohit
 ```
 
-## Getting Started
+```
+User: Send an email to rreditz2004@gmail.com about the gaming pass giveaway. My name is Rohith.
+Eileen: email|rreditz2004@gmail.com|Request for Gaming Pass Giveaway|Dear [Recipient's Name],
 
-### Prerequisites
+I hope this message finds you well. My name is Rohith, and I am reaching out to inquire about the gaming pass giveaway. I am very interested in participating and would appreciate any information you could provide regarding the process or requirements.
 
-- Python 3.8 or higher
-- `openai`, `langchain`, and `python-dotenv` Python packages
-- `.env` file with your OpenAI API key, Gmail address, and Gmail app password
+Thank you for your time, and I look forward to hearing from you soon.
 
-### Installation
-
-1. Clone the repository.
-2. Install dependencies:
-   ```bash
-   pip install openai langchain python-dotenv
-   ```
-3. Create a `.env` file in your project directory and add the following:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   GMAIL_ADDRESS=your_gmail_address_here
-   GMAIL_APP_PASSWORD=your_gmail_app_password_here
-   ```
-
-### Running Eileen
-
-```bash
-python eileen_chatbot.py
+Best regards,
+Rohith
 ```
 
-You'll be greeted by Eileen. Type your messages, and type `stop` to end the conversation.
+---
 
-## How Email Handling Works
+## Notes
 
-- If your prompt includes a Gmail address, Eileen will use it to send the email.
-- If only a name or non-Gmail address is provided, Eileen will help you draft the message and prompt you to provide the email address if needed.
-- Eileen never assumes or generates email addresses—she only uses what you provide.
+- Eileen will **never guess or fabricate** email addresses.
+- All emails are sent using your Gmail account via a secure app password.
+- The chat interface requires Streamlit version 1.25 or higher for the best experience.
 
-## Customization
+---
 
-- **Model Selection:** Change the model in `init_chat_model` for different capabilities.
-- **Prompt Engineering:** Adjust the prompt template for different personalities or behaviors.
-- **Conversation Memory:** Enhance or persist `conversation_history` for longer-term memory.
+## License
+
+MIT License
+
+---
+
+## Credits
+
+- Built with [Streamlit](https://streamlit.io/), [OpenAI](https://openai.com/), and [LangChain](https://www.langchain.com/).
